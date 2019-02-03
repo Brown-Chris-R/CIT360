@@ -7,7 +7,7 @@ public class QueueCollection {
     public static void main(String[] args) {
         Queue<Integer> queueOfInts = new LinkedList<>();
 
-        // Adds elements {0, 1, 2, 3, 4} to queue
+        // Adds elements {10, 11, 12, 13, 14 . . . 20} to queue
         for (int i=10; i<=20; i++)
             queueOfInts.add(i);
 
@@ -24,9 +24,7 @@ public class QueueCollection {
         int head = queueOfInts.peek();
         System.out.println("head of queue: " + head);
 
-        // Rest all methods of collection interface,
-        // Like size and contains can be used with this
-        // implementation.
+        // Show the size (number of elements in) of the queue at this point
         int size = queueOfInts.size();
         System.out.println("Size of queue: " + size);
     }
