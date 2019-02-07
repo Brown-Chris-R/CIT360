@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name = "hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+
+        <!-- volunteerhub is the database name -->
+        <property name = "hibernate.connection.url">
+            jdbc:mysql://ec2-35-160-252-123.us-west-2.compute.amazonaws.com/volunteerhub
+        </property>
+
+        <property name = "hibernate.connection.username">cbrown</property>
+        <property name = "hibernate.connection.password">Hackerseatp00p!</property>
+
+        <property name = "show_sql">true</property>
+        <property name = "format_sql">true</property>
+
+        <property name = "current_session_context_class">thread</property>
+
+        <mapping class="volunteerhub.User"/>
+        <mapping class="volunteerhub.Organization"/>
+        <mapping class="volunteerhub.Opportunities"/>
+        <mapping class="volunteerhub.Volunteer"/>
+
+    </session-factory>
+</hibernate-configuration>
