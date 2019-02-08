@@ -28,7 +28,7 @@ public class User implements Serializable {
     @Column(name = "active")
     private char active;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Organization> organizations;
 
     // Default Constructor

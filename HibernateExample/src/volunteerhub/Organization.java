@@ -51,7 +51,7 @@ public class Organization implements Serializable{
     // @Column(name = "user_id")
     // int userId;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 

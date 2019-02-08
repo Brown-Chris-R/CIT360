@@ -41,9 +41,9 @@ public class Opportunities implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opportunities")
     private List<Volunteer> volunteers;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id", referencedColumnName = "organization_id")
-    private Organization organizations;
+    private Organization organization;
 
     public Opportunities() {
     }
@@ -138,12 +138,12 @@ public class Opportunities implements Serializable {
         this.volunteers = volunteers;
     }
 
-    public Organization getOrganizations() {
-        return organizations;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public void setOrganizations(Organization organizations) {
-        this.organizations = organizations;
+    public void setOrganizations(Organization organization) {
+        this.organization = organization;
     }
 
 }
