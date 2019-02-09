@@ -40,7 +40,7 @@ public class TryMe {
                 organizations = user.getOrganizations();
 
                 // Demonstrate the C - Create a new Volunteer record and attach it to opportunityid 5
-                opportunities.setOpportunityId(5);
+                opportunities = session.get(Opportunities.class, 5);
                 volunteer = new Volunteer("Test Volunteer", "Test inserting a volunteer","test@volunteer.com","1112223333",'Y', opportunities);
                 session.persist(volunteer);
 

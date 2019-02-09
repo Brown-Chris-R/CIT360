@@ -35,8 +35,8 @@ public class Opportunities implements Serializable {
     @Column(name = "active")
     char active;
 
-    @Column(name = "user_id")
-    int userId;
+    // @Column(name = "organization_id")
+    // int organizationId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opportunities")
     private List<Volunteer> volunteers;
@@ -56,7 +56,7 @@ public class Opportunities implements Serializable {
         this.eventEndDate = eventEndDate;
         this.eventEndTime = eventEndTime;
         this.active = active;
-        this.userId = userId;
+        // this.userId = userId;
     }
 
     public int getOpportunityId() {
@@ -123,13 +123,13 @@ public class Opportunities implements Serializable {
         this.active = active;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+    //public int getUserId() {
+    //    return userId;
+    //}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    //public void setUserId(int userId) {
+    //    this.userId = userId;
+    //}
     public List<Volunteer> getVolunteers() {
         return volunteers;
     }
