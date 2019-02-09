@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "organization")
 public class Organization implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "organization_id")
     private int organizationId;
 

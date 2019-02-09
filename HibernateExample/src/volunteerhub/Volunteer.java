@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name = "volunteer")
 public class Volunteer implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "volunteer_id")
     int volunteerId;
 
@@ -35,13 +35,13 @@ public class Volunteer implements Serializable {
     // Default Constructor
     public Volunteer() {}
 
-    public Volunteer(String name, String description, String emailAddress, String phoneNumber, char active, int opportunityId) {
+    public Volunteer(String name, String description, String emailAddress, String phoneNumber, char active, Opportunities opportunity) {
         this.name = name;
         this.description = description;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.active = active;
-        // this.opportunityId = opportunityId;
+        this.opportunities = opportunity;
     }
 
     public int getVolunteerId() {

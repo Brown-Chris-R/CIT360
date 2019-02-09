@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "opportunities")
 public class Opportunities implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "opportunity_id")
     int opportunityId;
 
