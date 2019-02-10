@@ -83,7 +83,7 @@ public class TryMe {
                     // Import a new user - read json string from file and change to user object and save it
                     newUser = mapper.readValue(new File("newuser.json"), User.class);
                     System.out.println("\nUser Object created from Json file:");
-                    session.persist(user);
+                    session.persist(newUser);
                     System.out.println("\nnewUser user created from user.json file: " + newUser);
                 }
                 catch (JsonParseException e) {e.printStackTrace();}
