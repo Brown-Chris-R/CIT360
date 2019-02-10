@@ -1,5 +1,7 @@
 package volunteerhub;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @Entity(name = "Opportunities")
 @Table(name = "opportunities")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="opportunityId")
 public class Opportunities implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +42,7 @@ public class Opportunities implements Serializable {
     // int organizationId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opportunities")
+    @JsonBackReference
     private List<Volunteer> volunteers;
 
     @ManyToOne(fetch = FetchType.LAZY)

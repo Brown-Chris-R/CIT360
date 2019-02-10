@@ -1,10 +1,16 @@
 package volunteerhub;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "Volunteer")
 @Table(name = "volunteer")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="volunteerId")
 public class Volunteer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

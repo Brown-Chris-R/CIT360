@@ -1,11 +1,14 @@
 package volunteerhub;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "Organization")
 @Table(name = "organization")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="organizationId")
 public class Organization implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +59,7 @@ public class Organization implements Serializable{
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
+    @JsonBackReference
     private List<Opportunities> opportunities;
 
     public Organization() {

@@ -1,11 +1,18 @@
 package volunteerhub;
 
+// Hibernate Imports
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.collection.internal.PersistentBag;
 
-import java.util.ArrayList;
+// JSON imports
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
@@ -13,6 +20,18 @@ import static java.lang.Thread.sleep;
 // Demonstrate CRUD operations using fully modeled 4-table database with relationships
 public class TryMe {
     public static void main(String[] args) {
+        User user = new User();
+        User newUser = new User();
+        List<Organization> organizations = new PersistentBag();
+        Organization organization = new Organization();
+        Opportunities opportunities = new Opportunities();
+        Volunteer volunteer = new Volunteer();
+        int tempUserIdent;
+        String tempUserName;
+        byte admin = 1;
+        byte notAdmin = 0;
+        String userJSON;
+
             SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
                     .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Organization.class)
@@ -23,17 +42,6 @@ public class TryMe {
             Session session = sessionFactory.getCurrentSession();
 
             try {
-                User user = new User();
-                User newUser = new User();
-                List<Organization> organizations = new PersistentBag();
-                Organization organization = new Organization();
-                Opportunities opportunities = new Opportunities();
-                Volunteer volunteer = new Volunteer();
-                int tempUserIdent;
-                String tempUserName;
-                byte admin = 1;
-                byte notAdmin = 0;
-
                 // Demonstrate the R - Get user where userid = 7, and get any associated organizations for that user
                 session.beginTransaction();
                 user = session.get(User.class, 7);
@@ -60,6 +68,28 @@ public class TryMe {
 
                 // Demonstrate the D - Delete user just created
                 session.delete(newUser);
+
+                /* ----------------------------------- Begin JSON Demo -----------------------------------------------*/
+                // Create mapper, this is reusable.
+                ObjectMapper mapper = new ObjectMapper();
+
+                try {
+                    // Serialize user object to json string
+                    userJSON = mapper.writeValueAsString(user);
+                    System.out.println("\nUser json string:" + userJSON);
+                    // change dog object to json string and save to file
+                    mapper.writeValue(new File("user.json"), user);
+
+                    // Import a new user - read json string from file and change to user object and save it
+                    newUser = mapper.readValue(new File("newuser.json"), User.class);
+                    System.out.println("\nUser Object created from Json file:");
+                    session.persist(user);
+                    System.out.println("\nnewUser user created from user.json file: " + newUser);
+                }
+                catch (JsonParseException e) {e.printStackTrace();}
+                catch (JsonMappingException e) {e.printStackTrace();}
+                catch (IOException e) {e.printStackTrace();}
+                /* ------------------------------------ End JSON Demo ------------------------------------------------*/
 
                 // Commit the transactions
                 session.getTransaction().commit();
