@@ -18,8 +18,10 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 // Demonstrate CRUD operations using fully modeled 4-table database with relationships
+// Also demonstrate JSON Serialization and Deserialization
 public class TryMe {
     public static void main(String[] args) {
+        // Define variables
         User user = new User();
         User newUser = new User();
         List<Organization> organizations = new PersistentBag();
@@ -32,6 +34,7 @@ public class TryMe {
         byte notAdmin = 0;
         String userJSON;
 
+        /* ----------------------------------- Begin Hibernate Demo -----------------------------------------------*/
             SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
                     .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Organization.class)
@@ -43,6 +46,7 @@ public class TryMe {
 
             try {
                 // Demonstrate the R - Get user where userid = 7, and get any associated organizations for that user
+                // The user and associated organizations will be displayed at the end of the program
                 session.beginTransaction();
                 user = session.get(User.class, 7);
                 organizations = user.getOrganizations();
