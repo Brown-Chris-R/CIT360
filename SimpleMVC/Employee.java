@@ -1,15 +1,15 @@
 package SimpleMVC;
 
-public class Student {
-    private String rollNo;
+public class Employee {
+    private String role;
     private String name;
 
-    public String getRollNo() {
-        return rollNo;
+    public String getRole() {
+        return role;
     }
 
-    public void setRollNo(String rollNo) {
-        this.rollNo = rollNo;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getName() {
