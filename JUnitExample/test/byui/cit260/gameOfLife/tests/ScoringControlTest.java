@@ -3,8 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package byui.cit260.gameOfLife.control;
+package byui.cit260.gameOfLife.tests;
 
+import byui.cit260.gameOfLife.control.GameControl;
+import byui.cit260.gameOfLife.exceptions.GameControlException;
+import byui.cit260.gameOfLife.control.ScoringControl;
+import byui.cit260.gameOfLife.exceptions.ItemControlException;
+import byui.cit260.gameOfLife.exceptions.ScoringControlException;
+import byui.cit260.gameOfLife.model.Game;
+import byui.cit260.gameOfLife.model.Player;
+import byui.cit260.gameOfLife.view.ErrorView;
+import cit260.game.of.life.team.b.CIT260GameOfLifeTeamB;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -22,6 +31,24 @@ public class ScoringControlTest {
      */
     @Test
     public void testScoreAdolescenceSchoolChoice() {
+
+        // Create test player
+        Player testPlayer;
+        try {
+            testPlayer = GameControl.createPlayer("Test");
+            // Create test Game object
+            try {
+                GameControl.createNewGame(testPlayer);
+            } catch (GameControlException ge) {
+                ErrorView.display(this.getClass().getName(), ge.getMessage());
+                return;
+            } catch (Throwable te){
+                ErrorView.display(this.getClass().getName(), te.getMessage());
+            }
+        } catch (GameControlException ge) {
+            ErrorView.display(this.getClass().getName(), ge.getMessage());
+        }
+
         System.out.println("scoreAdolescenceSchoolChoice");
 
         /**********************************************************************
@@ -29,13 +56,13 @@ public class ScoringControlTest {
          *********************************************************************/
         System.out.println("Test Case #1");
         char choice = 'A';
-        ScoringControl instance = new ScoringControl();
+        ScoringControl sc = new ScoringControl();
 
         int expResult = -10;
         int result;
 
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -49,7 +76,7 @@ public class ScoringControlTest {
         choice = 'B';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -62,7 +89,7 @@ public class ScoringControlTest {
         choice = 'C';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -75,10 +102,13 @@ public class ScoringControlTest {
         choice = 'D';
         expResult = -1;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
-            assertEquals(expResult, result);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
+            fail();
         }
-        catch (Exception e){
+        catch (ScoringControlException e){
+            assertEquals("Choice D is not a valid choice. Must be an 'A', 'B' or 'C'.", e.getMessage());
+        }
+        catch (ItemControlException e){
             fail(e.getMessage());
         }
         /**********************************************************************
@@ -88,10 +118,13 @@ public class ScoringControlTest {
         choice = '1';
         expResult = -1;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
-            assertEquals(expResult, result);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
+            fail();
         }
-        catch (Exception e){
+        catch (ScoringControlException e){
+            assertEquals("Choice 1 is not a valid choice. Must be an 'A', 'B' or 'C'.", e.getMessage());
+        }
+        catch (ItemControlException e){
             fail(e.getMessage());
         }
         /**********************************************************************
@@ -101,10 +134,13 @@ public class ScoringControlTest {
         choice = '@';
         expResult = -1;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
-            assertEquals(expResult, result);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
+            fail();
         }
-        catch (Exception e){
+        catch (ScoringControlException e){
+            assertEquals("Choice @ is not a valid choice. Must be an 'A', 'B' or 'C'.", e.getMessage());
+        }
+        catch (ItemControlException e){
             fail(e.getMessage());
         }
         /**********************************************************************
@@ -114,7 +150,7 @@ public class ScoringControlTest {
         choice = 'B';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -127,7 +163,7 @@ public class ScoringControlTest {
         choice = 'B';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -140,7 +176,7 @@ public class ScoringControlTest {
         choice = 'B';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -153,7 +189,7 @@ public class ScoringControlTest {
         choice = 'C';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -166,7 +202,7 @@ public class ScoringControlTest {
         choice = 'C';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -179,7 +215,7 @@ public class ScoringControlTest {
         choice = 'C';
         expResult = 5;
         try {
-            result = instance.scoreAdolescenceSchoolChoice(choice);
+            result = sc.scoreAdolescenceSchoolChoice(choice);
             assertEquals(expResult, result);
         }
         catch (Exception e){
@@ -192,7 +228,24 @@ public class ScoringControlTest {
      */
     @Test
     public void testCalcOperation() {
-        
+
+        // Create test player
+        Player testPlayer;
+        try {
+            testPlayer = GameControl.createPlayer("Test");
+            // Create test Game object
+            try {
+                GameControl.createNewGame(testPlayer);
+            } catch (GameControlException ge) {
+                ErrorView.display(this.getClass().getName(), ge.getMessage());
+                return;
+            } catch (Throwable te){
+                ErrorView.display(this.getClass().getName(), te.getMessage());
+            }
+        } catch (GameControlException ge) {
+            ErrorView.display(this.getClass().getName(), ge.getMessage());
+        }
+
         System.out.println("calcOperation");
 
         /**********************************************************************
@@ -226,11 +279,10 @@ public class ScoringControlTest {
 
         try {
             result = instance.calcOperation(hospitalBillAmt, insuranceDeductibleAmt, insuranceCoverageAmt);
-
-            assertEquals(expResult, result, 0.01);
+            fail();
         }
-        catch (Exception e){
-            fail(e.getMessage());
+        catch (ScoringControlException e){
+            assertEquals("Hospital Bill Amount must be greater than zero.", e.getMessage());
         }
         /**********************************************************************
          * Test Case #3
@@ -243,11 +295,10 @@ public class ScoringControlTest {
 
         try {
             result = instance.calcOperation(hospitalBillAmt, insuranceDeductibleAmt, insuranceCoverageAmt);
-
-            assertEquals(expResult, result, 0.01);
+            fail();
         }
-        catch (Exception e){
-            fail(e.getMessage());
+        catch (ScoringControlException e){
+            assertEquals("Hospital Bill Amount must be less than $30,000.", e.getMessage());
         }
         /**********************************************************************
          * Test Case #4
@@ -260,13 +311,11 @@ public class ScoringControlTest {
 
         try {
             result = instance.calcOperation(hospitalBillAmt, insuranceDeductibleAmt, insuranceCoverageAmt);
-
-            assertEquals(expResult, result, 0.01);
+            fail();
         }
-        catch (Exception e){
-            fail(e.getMessage());
-        }
-        /**********************************************************************
+        catch (ScoringControlException e){
+            assertEquals("Insurance Deductible Amount cannot be less than zero", e.getMessage());
+        }        /**********************************************************************
          * Test Case #5
          *********************************************************************/
         System.out.println("Test Case #5");       
@@ -277,12 +326,11 @@ public class ScoringControlTest {
 
         try {
             result = instance.calcOperation(hospitalBillAmt, insuranceDeductibleAmt, insuranceCoverageAmt);
-
-            assertEquals(expResult, result, 0.01);
+            fail();
         }
-        catch (Exception e){
-            fail(e.getMessage());
-        }
+        catch (ScoringControlException e){
+            assertEquals("Insurance Deductible Amount cannot be greater than %500", e.getMessage());
+        }        /**********************************************************************
         /**********************************************************************
          * Test Case #6
          *********************************************************************/
@@ -294,12 +342,12 @@ public class ScoringControlTest {
 
         try {
             result = instance.calcOperation(hospitalBillAmt, insuranceDeductibleAmt, insuranceCoverageAmt);
-
-            assertEquals(expResult, result, 0.01);
+            fail();
         }
-        catch (Exception e){
-            fail(e.getMessage());
+        catch (ScoringControlException e){
+            assertEquals("Insurance Coverage Amount cannot be less than zero", e.getMessage());
         }
+        /**********************************************************************
         /**********************************************************************
          * Test Case #7
          *********************************************************************/
@@ -311,11 +359,10 @@ public class ScoringControlTest {
 
         try {
             result = instance.calcOperation(hospitalBillAmt, insuranceDeductibleAmt, insuranceCoverageAmt);
-
-            assertEquals(expResult, result, 0.01);
+            fail();
         }
-        catch (Exception e){
-            fail(e.getMessage());
+        catch (ScoringControlException e){
+            assertEquals("Insurance Coverage Amount cannot be greater than 100%", e.getMessage());
         }
         /**********************************************************************
          * Test Case #8

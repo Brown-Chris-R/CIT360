@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package byui.cit260.gameOfLife.control;
+package byui.cit260.gameOfLife.tests;
 
+import byui.cit260.gameOfLife.control.MapControl;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
  * @author cbrown
  */
 public class MapControlTest {
-    
+
     public MapControlTest() {
     }
 
@@ -27,16 +28,16 @@ public class MapControlTest {
         /**********************************************************************
          * Test Case #1
          *********************************************************************/
-        System.out.println("Test Case #1");       
+        System.out.println("Test Case #1");
         String phase = "Childhood";
         MapControl instance = new MapControl();
-        String[] expResult = {"Home", "School", "Home",null};
+        String[] expResult = {"Church", "School", "Home", null};
         String[] result = instance.getLocations(phase);
         assertArrayEquals(expResult, result);
         /**********************************************************************
          * Test Case #2
          *********************************************************************/
-        System.out.println("Test Case #2");       
+        System.out.println("Test Case #2");
         phase = "Adolescence";
         expResult[0] = "Church";
         expResult[1] = "School";
@@ -47,7 +48,7 @@ public class MapControlTest {
         /**********************************************************************
          * Test Case #3
          *********************************************************************/
-        System.out.println("Test Case #3");       
+        System.out.println("Test Case #3");
         phase = "Adulthood";
         expResult[0] = "Mission";
         expResult[1] = "Work";
@@ -58,7 +59,7 @@ public class MapControlTest {
         /**********************************************************************
          * Test Case #4
          *********************************************************************/
-        System.out.println("Test Case #4");       
+        System.out.println("Test Case #4");
         phase = "Senior";
         expResult[0] = "Church";
         expResult[1] = "Home";
@@ -69,7 +70,7 @@ public class MapControlTest {
         /**********************************************************************
          * Test Case #5
          *********************************************************************/
-        System.out.println("Test Case #5");       
+        System.out.println("Test Case #5");
         phase = "Nothing";
         expResult[0] = "Invalid";
         expResult[1] = null;

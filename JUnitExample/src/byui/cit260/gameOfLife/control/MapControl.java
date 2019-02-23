@@ -358,7 +358,7 @@ public String[] getLocations(String phase) {
     }
     switch (phase) {
         case "Childhood":
-            validLocations[0] = "Home";
+            validLocations[0] = "Church";
             validLocations[1] = "School";
             validLocations[2] = "Home";
             break;
